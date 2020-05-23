@@ -7,7 +7,7 @@
 %let comment_char = [^\n];
 
 %let digit = [0-9];
-%let int = {digit}+;
+%let int = -?{digit}+;
 
 %let doublequote = ["];
 %let escape_sequence = "\\" ([n"] | "\\");
