@@ -26,9 +26,9 @@
 <INITIAL> {ws}+ => ( continue() );
 
 (* comments *)
-<INITIAL> {comment_start} => ( YYBEGIN COMMENT ; T.CommentStart );
-<COMMENT> {comment_char} => ( char1 yytext );
-<COMMENT> {newline} => ( YYBEGIN INITIAL ; T.CommentEnd );
+<INITIAL> {comment_start} => ( YYBEGIN COMMENT ; continue() );
+<COMMENT> {comment_char} => ( continue() );
+<COMMENT> {newline} => ( YYBEGIN INITIAL ; continue() );
 
 (* special characters *)
 <INITIAL> "(" => ( T.LParen );

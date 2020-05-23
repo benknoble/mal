@@ -11,9 +11,7 @@
   | Tilde ("~")
   | At ("@")
   | Caret ("^")
-    (* comments *)
-  | CommentStart (";") | CommentEnd ("\n")
-    (* regular program text *)
+  (* regular program text *)
   | DoubleQuote ("\"")
   | Char of char
   | Num of int
