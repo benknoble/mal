@@ -19,7 +19,7 @@ BINS = \
 
 CM = mal.cm
 SOURCE = *.sml
-GENERATED = lexer.lex.sml
+GENERATED = lexer.lex.sml parser.grm.sml
 
 BUILD = ml-build
 

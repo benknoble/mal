@@ -51,7 +51,7 @@
 <INITIAL> nil => ( T.Nil );
 
 (* strings *)
-<INITIAL> {doublequote} => ( YYBEGIN STRING ; T.StringStart );
+<INITIAL> {doublequote} => ( YYBEGIN STRING ; T.DoubleQuote );
 <STRING> {escape_sequence} => (
   let val escaped = String.sub (yytext, 1)
   in case escaped
@@ -59,7 +59,7 @@
      | c => T.Char c
   end
 );
-<STRING> {doublequote} => ( YYBEGIN INITIAL ; T.StringEnd );
+<STRING> {doublequote} => ( YYBEGIN INITIAL ; T.DoubleQuote );
 <STRING> . => ( char1 yytext );
 
 (* everything else is a Char token *)

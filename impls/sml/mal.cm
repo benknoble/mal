@@ -10,6 +10,8 @@ Group
 
   structure Tokens
   structure Lexer
+
+  functor ParseFn
 is
   $/basis.cm
   $/smlnj-lib.cm
@@ -21,5 +23,6 @@ is
   step0_repl.sml
   step1_read_print.sml
 
-  tokens.sml
+
   lexer.lex : ml-ulex
+  parser.grm : ml-antlr
