@@ -19,7 +19,7 @@ is
   console.sml
   repl.sml
   step0_repl.sml
-  step1_repl.sml
+  step1_read_print.sml
 
   tokens.sml
   lexer.lex : ml-ulex
