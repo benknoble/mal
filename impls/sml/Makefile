@@ -35,7 +35,7 @@ $(BINS): $(CM) $(SOURCE)
 
 clean:
 	-$(RM) $(BINS)
+	-$(RM) $(GENERATED)
 
 distclean: clean
 	-$(RM) -r .cm
-	-$(RM) $(GENERATED)
