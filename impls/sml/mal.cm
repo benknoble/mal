@@ -5,9 +5,10 @@ Group
   structure Console
 
   signature REPL
-  structure Repl
+  structure Step0_Repl
 is
   $/basis.cm
   main.sml
   console.sml
+  repl.sml
   step0_repl.sml
