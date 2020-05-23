@@ -23,7 +23,7 @@
 );
 
 (* skip whitespace *)
-<INITIAL> {ws}+ => ( skip() );
+<INITIAL> {ws}+ => ( continue() );
 
 (* comments *)
 <INITIAL> {comment_start} => ( YYBEGIN COMMENT ; T.CommentStart );
