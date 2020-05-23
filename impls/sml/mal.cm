@@ -8,6 +8,8 @@ Group
   structure Step0_Repl
   structure Step1_Repl
 
+  structure Sexp
+
   structure Tokens
   structure Lexer
 
@@ -23,6 +25,7 @@ is
   step0_repl.sml
   step1_read_print.sml
 
+  sexp.sml
 
   lexer.lex : ml-ulex
   parser.grm : ml-antlr
