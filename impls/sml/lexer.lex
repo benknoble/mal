@@ -53,7 +53,7 @@
 (* strings *)
 <INITIAL> {doublequote} => ( YYBEGIN STRING ; T.StringStart );
 <STRING> {escape_sequence} => (
-  let val escaped = String.sub (yytext, 2)
+  let val escaped = String.sub (yytext, 1)
   in case escaped
     of #"n" => T.Char #"\n"
      | c => T.Char c
