@@ -6,6 +6,7 @@ Group
 
   signature REPL
   structure Step0_Repl
+  structure Step1_Repl
 
   structure Tokens
   structure Lexer
@@ -18,6 +19,7 @@ is
   console.sml
   repl.sml
   step0_repl.sml
+  step1_repl.sml
 
   tokens.sml
   lexer.lex : ml-ulex

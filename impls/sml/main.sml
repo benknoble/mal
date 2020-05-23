@@ -7,4 +7,8 @@ structure Main = struct
     Step0_Repl.repl ()
     ; Proc.success
     )
+
+  fun step1_repl (_ : args) : Proc.status =
+    ( Step1_Repl.repl ()
+    ; Proc.success)
 end
