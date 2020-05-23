@@ -6,9 +6,18 @@ Group
 
   signature REPL
   structure Step0_Repl
+
+  structure Tokens
+  structure Lexer
 is
   $/basis.cm
+  $/smlnj-lib.cm
+  $/ml-lpt-lib.cm
+
   main.sml
   console.sml
   repl.sml
   step0_repl.sml
+
+  tokens.sml
+  lexer.lex : ml-ulex

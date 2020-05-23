@@ -19,6 +19,7 @@ BINS = \
 
 CM = mal.cm
 SOURCE = *.sml
+GENERATED = lexer.lex.sml
 
 BUILD = ml-build
 
@@ -37,3 +38,4 @@ clean:
 
 distclean: clean
 	-$(RM) -r .cm
+	-$(RM) $(GENERATED)
