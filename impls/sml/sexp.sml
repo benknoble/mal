@@ -5,6 +5,8 @@ structure Sexp = struct
                 | String of string
                 | List of form list
 
+  val sym : string -> form = Symbol o Atom.atom
+
   fun toString sexp =
     case sexp
       of Symbol a => Atom.toString a
