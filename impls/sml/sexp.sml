@@ -1,5 +1,6 @@
 structure Sexp = struct
-  datatype form = Symbol of Atom.atom
+  datatype form = Nil
+                | Symbol of Atom.atom
                 | Bool of bool
                 | Num of int
                 | String of string
@@ -9,7 +10,8 @@ structure Sexp = struct
 
   fun toString sexp =
     case sexp
-      of Symbol a => Atom.toString a
+      of Nil => "nil"
+       | Symbol a => Atom.toString a
        | Bool b => Bool.toString b
        | Num n => (if n < 0 then "-" else "") ^ (Int.toString (abs n))
        | String s => "\"" ^ s ^ "\""

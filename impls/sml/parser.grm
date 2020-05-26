@@ -30,5 +30,6 @@ form
 
 atom
   : Num => ( Sexp.Num Num )
+  | Nil => ( Sexp.Nil )
   | ID => ( Sexp.sym ID )
   ;
