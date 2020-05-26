@@ -5,13 +5,11 @@ Group
   structure Console
 
   structure Step0_Repl
+
   structure Step1_Repl
-
   structure Sexp
-
   structure Tokens
   structure Lexer
-
   functor ParseFn
 is
   $/basis.cm
@@ -22,9 +20,8 @@ is
   console.sml
 
   step0_repl.sml
+
   step1_read_print.sml
-
   sexp.sml
-
   lexer.lex : ml-ulex
   parser.grm : ml-antlr
