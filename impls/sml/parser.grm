@@ -42,5 +42,7 @@ atom
   | Nil => ( Sexp.Nil )
   | True => ( Sexp.Bool true ) | False => ( Sexp.Bool false )
   | DoubleQuote Char* DoubleQuote => ( Sexp.String (implode Char) )
-  | ID => ( Sexp.sym ID )
+  | ID => ( case (explode ID)
+              of #":" :: tl => Sexp.kw (implode tl)
+               | _ => Sexp.sym ID )
   ;

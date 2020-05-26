@@ -1,5 +1,6 @@
 structure Sexp = struct
   datatype form = Nil
+                | Keyword of Atom.atom
                 | Symbol of Atom.atom
                 | Bool of bool
                 | Num of int
@@ -9,11 +10,13 @@ structure Sexp = struct
   datatype representation = AsCode | AsText
 
   val sym : string -> form = Symbol o Atom.atom
+  val kw : string -> form = Keyword o Atom.atom
 
   fun toString rep sexp =
     case sexp
       of Nil => "nil"
-       | Symbol a => Atom.toString a
+       | Keyword k => ":" ^ Atom.toString k
+       | Symbol s => Atom.toString s
        | Bool b => Bool.toString b
        | Num n => (if n < 0 then "-" else "") ^ (Int.toString (abs n))
        | String s =>
