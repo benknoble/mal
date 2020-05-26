@@ -22,3 +22,13 @@
 ;
 
 %start form;
+
+form
+  : "(" form* ")" => ( Sexp.List form )
+  | atom => ( atom )
+  ;
+
+atom
+  : Num => ( Sexp.Num Num )
+  | ID => ( Sexp.sym ID )
+  ;
