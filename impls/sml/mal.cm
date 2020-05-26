@@ -4,7 +4,6 @@ Group
   signature CONSOLE
   structure Console
 
-  signature REPL
   structure Step0_Repl
   structure Step1_Repl
 
@@ -21,7 +20,7 @@ is
 
   main.sml
   console.sml
-  repl.sml
+
   step0_repl.sml
   step1_read_print.sml
 

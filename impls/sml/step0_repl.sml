@@ -1,4 +1,4 @@
-structure Step0_Repl : REPL = struct
+structure Step0_Repl = struct
   fun read (s : string) = s
   fun eval s = s
   fun print s = s
