@@ -31,5 +31,6 @@ form
 atom
   : Num => ( Sexp.Num Num )
   | Nil => ( Sexp.Nil )
+  | True => ( Sexp.Bool true ) | False => ( Sexp.Bool false )
   | ID => ( Sexp.sym ID )
   ;
