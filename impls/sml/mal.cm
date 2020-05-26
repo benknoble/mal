@@ -11,6 +11,7 @@ Group
   structure Tokens
   structure Lexer
   functor ParseFn
+  structure Reader
 is
   $/basis.cm
   $/smlnj-lib.cm
@@ -25,3 +26,4 @@ is
   sexp.sml
   lexer.lex : ml-ulex
   parser.grm : ml-antlr
+  reader.sml
