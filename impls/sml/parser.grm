@@ -1,5 +1,6 @@
-(* vim: ft=antlr
-*)
+(*
+ * vim: ft=sml
+ *)
 
 %tokens
   (* punctuation *)
