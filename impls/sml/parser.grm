@@ -15,6 +15,7 @@
   (* regular program text *)
   | DoubleQuote ("\"")
   | Char of char
+  | ID of string
   | Num of int
   | True ("true") | False ("false")
   | Nil ("nil")

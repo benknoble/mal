@@ -9,6 +9,10 @@
 %let digit = [0-9];
 %let int = -?{digit}+;
 
+%let reserved = ( {ws} | "[" | "]" | [(){}'"`;] );
+%let idchar = ~{reserved};
+%let id = {idchar}+;
+
 %let doublequote = ["];
 %let escape_sequence = "\\" ([n"] | "\\");
 
@@ -49,6 +53,7 @@
 <INITIAL> true => ( T.True );
 <INITIAL> false => ( T.False );
 <INITIAL> nil => ( T.Nil );
+<INITIAL> {id} => ( T.ID yytext );
 
 (* strings *)
 <INITIAL> {doublequote} => ( YYBEGIN STRING ; T.DoubleQuote );
@@ -61,6 +66,3 @@
 );
 <STRING> {doublequote} => ( YYBEGIN INITIAL ; T.DoubleQuote );
 <STRING> . => ( char1 yytext );
-
-(* everything else is a Char token *)
-<INITIAL> . => ( char1 yytext );
