@@ -9,7 +9,7 @@
 %let digit = [0-9];
 %let int = -?{digit}+;
 
-%let reserved = ( {ws} | "[" | "]" | [(){}'"`;] );
+%let reserved = ( {ws} | "[" | "]" | [@~(){}'"`;] );
 %let idchar = ~{reserved} & .;
 %let id = {idchar}+;
 

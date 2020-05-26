@@ -2,6 +2,10 @@
  * vim: ft=sml
  *)
 
+%defs (
+  fun readerMacro name form = Sexp.List [(Sexp.sym name), form]
+);
+
 %tokens
   (* punctuation *)
   : LParen ("(") | RParen (")")
@@ -26,6 +30,11 @@
 form
   : "(" form* ")" => ( Sexp.List form )
   | atom => ( atom )
+  | Quote form => ( readerMacro "quote" form )
+  | Backtick form => ( readerMacro "quasiquote" form )
+  | Tilde form => ( readerMacro "unquote" form )
+  | Splice form => ( readerMacro "splice-unquote" form )
+  | At form => ( readerMacro "deref" form )
   ;
 
 atom
