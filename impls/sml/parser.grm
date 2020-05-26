@@ -29,6 +29,7 @@
 
 form
   : "(" form* ")" => ( Sexp.List form )
+  | "[" form* "]" => ( Sexp.Vector form )
   | atom => ( atom )
   | Quote form => ( readerMacro "quote" form )
   | Backtick form => ( readerMacro "quasiquote" form )

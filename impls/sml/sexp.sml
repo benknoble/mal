@@ -6,6 +6,7 @@ structure Sexp : sig
                 | Num of int
                 | String of string
                 | List of form list
+                | Vector of form list
   datatype representation = AsCode | AsText
 
   val sym : string -> form
@@ -20,6 +21,7 @@ end = struct
                 | Num of int
                 | String of string
                 | List of form list
+                | Vector of form list
 
   datatype representation = AsCode | AsText
 
@@ -53,10 +55,13 @@ end = struct
 
   fun mkListToString toString rep =
     mkListLikeToString {left="(", right=")"} toString rep
+  fun mkVectorToString toString rep =
+    mkListLikeToString {left="[", right="]"} toString rep
 
   fun toString rep sexp =
     let
       val listToString = mkListToString toString rep
+      val vectorToString = mkVectorToString toString rep
       val stringToString = mkStringToString rep
     in
       case sexp
@@ -67,6 +72,7 @@ end = struct
          | Num n => (if n < 0 then "-" else "") ^ (Int.toString (abs n))
          | String s => stringToString s
          | List sexps => listToString sexps
+         | Vector sexps => vectorToString sexps
     end
 
   val toReplString = toString AsCode
