@@ -32,5 +32,6 @@ atom
   : Num => ( Sexp.Num Num )
   | Nil => ( Sexp.Nil )
   | True => ( Sexp.Bool true ) | False => ( Sexp.Bool false )
+  | DoubleQuote Char* DoubleQuote => ( Sexp.String (implode Char) )
   | ID => ( Sexp.sym ID )
   ;

@@ -4,7 +4,7 @@ structure Step1_Repl = struct
 
   val read = Reader.readString
   fun eval s = s
-  fun print s = Sexp.toString s
+  val print = Sexp.toReplString
 
   val rep = print o eval o read
 
