@@ -18,7 +18,7 @@ BINS = \
        stepA_mal
 
 CM = mal.cm
-SOURCE = *.sml
+SOURCE = *.sml *.lex *.grm
 GENERATED = lexer.lex.sml parser.grm.sml
 
 BUILD = ml-build
