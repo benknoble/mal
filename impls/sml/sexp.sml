@@ -11,7 +11,7 @@ structure Sexp = struct
     case sexp
       of Symbol a => Atom.toString a
        | Bool b => Bool.toString b
-       | Num n => Int.toString n
+       | Num n => (if n < 0 then "-" else "") ^ (Int.toString (abs n))
        | String s => "\"" ^ s ^ "\""
        | List sexps =>
            let
