@@ -10,7 +10,7 @@
 %let int = -?{digit}+;
 
 %let reserved = ( {ws} | "[" | "]" | [(){}'"`;] );
-%let idchar = ~{reserved};
+%let idchar = ~{reserved} & .;
 %let id = {idchar}+;
 
 %let doublequote = ["];
@@ -27,7 +27,7 @@
 );
 
 (* skip whitespace *)
-<INITIAL> {ws}+ => ( continue() );
+<INITIAL> {ws} => ( continue() );
 
 (* comments *)
 <INITIAL> {comment_start} => ( YYBEGIN COMMENT ; continue() );
