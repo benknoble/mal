@@ -38,23 +38,35 @@ top
 comment : ";" Comment "\n" => ( Sexp.Comment Comment );
 
 form
-  : "(" form* ")" => ( Sexp.List form )
-  | "[" form* "]" => ( Sexp.Vector form )
-  | "{" kvs=(form form)* "}" => ( Sexp.Map kvs )
-  | atom => ( atom )
-  | Quote form => ( readerMacro "quote" form )
-  | Backtick form => ( readerMacro "quasiquote" form )
-  | Tilde form => ( readerMacro "unquote" form )
-  | Splice form => ( readerMacro "splice-unquote" form )
-  | At form => ( readerMacro "deref" form )
+  : slist
+  | vector
+  | map
+  | atom
+  | quote
+  | qquote
+  | unquote
+  | splice
+  | deref
   ;
+
+slist : "(" form* ")" => ( Sexp.List form ) ;
+vector : "[" form* "]" => ( Sexp.Vector form ) ;
+map : "{" kvs=(form form)* "}" => ( Sexp.Map kvs ) ;
+quote : Quote form => ( readerMacro "quote" form ) ;
+qquote : Backtick form => ( readerMacro "quasiquote" form ) ;
+unquote : Tilde form => ( readerMacro "unquote" form ) ;
+splice : Splice form => ( readerMacro "splice-unquote" form ) ;
+deref : At form => ( readerMacro "deref" form ) ;
 
 atom
   : Num => ( Sexp.Num Num )
   | Nil => ( Sexp.Nil )
   | True => ( Sexp.Bool true ) | False => ( Sexp.Bool false )
-  | DoubleQuote Char* DoubleQuote => ( Sexp.String (implode Char) )
-  | ID => ( case (explode ID)
-              of #":" :: tl => Sexp.kw (implode tl)
-               | _ => Sexp.sym ID )
+  | astring
+  | sym_kw
   ;
+
+astring : DoubleQuote Char* DoubleQuote => ( Sexp.String (implode Char) ) ;
+sym_kw : ID => ( case (explode ID)
+                   of #":" :: tl => Sexp.kw (implode tl)
+                    | _ => Sexp.sym ID ) ;
