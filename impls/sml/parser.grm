@@ -3,7 +3,7 @@
  *)
 
 %defs (
-  fun readerMacro name form = Sexp.List [(Sexp.sym name), form]
+  fun readerMacro name forms = Sexp.List ((Sexp.sym name)::forms)
   val isKeyword = String.isPrefix ":"
 );
 
@@ -53,11 +53,11 @@ form
 slist : "(" form* ")" => ( Sexp.List form ) ;
 vector : "[" form* "]" => ( Sexp.Vector form ) ;
 map : "{" kvs=(form form)* "}" => ( Sexp.Map kvs ) ;
-quote : Quote form => ( readerMacro "quote" form ) ;
-qquote : Backtick form => ( readerMacro "quasiquote" form ) ;
-unquote : Tilde form => ( readerMacro "unquote" form ) ;
-splice : Splice form => ( readerMacro "splice-unquote" form ) ;
-deref : At form => ( readerMacro "deref" form ) ;
+quote : Quote form => ( readerMacro "quote" [form] ) ;
+qquote : Backtick form => ( readerMacro "quasiquote" [form] ) ;
+unquote : Tilde form => ( readerMacro "unquote" [form] ) ;
+splice : Splice form => ( readerMacro "splice-unquote" [form] ) ;
+deref : At form => ( readerMacro "deref" [form] ) ;
 
 atom
   : Num => ( Sexp.Num Num )
