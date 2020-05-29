@@ -4,6 +4,8 @@ signature CONSOLE = sig
   val print : string -> unit
   val println : string -> unit
   val getln : unit -> input
+  val printerr : string -> unit
+  val printlnerr : string -> unit
   val stdIn : TextIO.instream
 end
 
@@ -12,6 +14,8 @@ structure Console : CONSOLE = struct
 
   val print = TextIO.print
   fun println s = print (s ^ "\n")
+  fun printerr s = TextIO.output (TextIO.stdErr, s)
+  fun printlnerr s = printerr (s ^ "\n")
   val stdIn = TextIO.stdIn
   fun getln () =
     case (TextIO.inputLine stdIn)
