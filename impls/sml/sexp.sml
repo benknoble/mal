@@ -8,6 +8,7 @@ structure Sexp : sig
                 | List of form list
                 | Vector of form list
                 | Map of (form * form) list
+                | Comment of string
   datatype representation = AsCode | AsText
 
   val sym : string -> form
@@ -24,6 +25,7 @@ end = struct
                 | List of form list
                 | Vector of form list
                 | Map of (form * form) list
+                | Comment of string
 
   datatype representation = AsCode | AsText
 
@@ -89,6 +91,9 @@ end = struct
          | List sexps => listToString sexps
          | Vector sexps => vectorToString sexps
          | Map kvs => mapToString kvs
+         | Comment s => case rep
+                          of AsCode => ""
+                           | AsText => ";" ^ s
     end
 
   val toReplString = toString AsCode

@@ -16,6 +16,7 @@
   | Tilde ("~")
   | At ("@")
   | Caret ("^")
+  | CommentStart (";") | Comment of string | CommentEnd ("\n")
   (* regular program text *)
   | DoubleQuote ("\"")
   | Char of char
@@ -27,7 +28,14 @@
 
 %keywords True, False, Nil;
 
-%start form;
+%start top;
+
+top
+  : form comment? => ( form )
+  | comment
+  ;
+
+comment : ";" Comment "\n" => ( Sexp.Comment Comment );
 
 form
   : "(" form* ")" => ( Sexp.List form )

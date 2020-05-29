@@ -30,9 +30,9 @@
 <INITIAL> {ws} => ( continue() );
 
 (* comments *)
-<INITIAL> {comment_start} => ( YYBEGIN COMMENT ; continue() );
-<COMMENT> {comment_char} => ( continue() );
-<COMMENT> {newline} => ( YYBEGIN INITIAL ; continue() );
+<INITIAL> {comment_start} => ( YYBEGIN COMMENT ; T.CommentStart );
+<COMMENT> {comment_char}* => ( T.Comment yytext );
+<COMMENT> {newline} => ( YYBEGIN INITIAL ; T.CommentEnd );
 
 (* special characters *)
 <INITIAL> "(" => ( T.LParen );
