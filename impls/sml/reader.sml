@@ -12,11 +12,11 @@ structure Reader = struct
       val (res, _, repairs) = Parser.parse lexer strm
       val error_messages = map (AntlrRepair.repairToString Tokens.toString sm) repairs
     in
-      case repairs
-        of _::_ => raise ParseErrors error_messages
-         | [] => case res
-                   of NONE => raise ParseErrors ["unrepairable parse error"]
-                              (* never observed this error in practice *)
-                    | SOME s => s
+      if null repairs
+      then case res
+             of NONE => raise ParseErrors ["unrepairable parse error"]
+             (* never observed this error in practice *)
+              | SOME s => s
+      else raise ParseErrors error_messages
     end
 end
