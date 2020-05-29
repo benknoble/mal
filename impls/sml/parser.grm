@@ -48,6 +48,7 @@ form
   | unquote
   | splice
   | deref
+  | meta
   ;
 
 slist : "(" form* ")" => ( Sexp.List form ) ;
@@ -58,6 +59,7 @@ qquote : Backtick form => ( readerMacro "quasiquote" [form] ) ;
 unquote : Tilde form => ( readerMacro "unquote" [form] ) ;
 splice : Splice form => ( readerMacro "splice-unquote" [form] ) ;
 deref : At form => ( readerMacro "deref" [form] ) ;
+meta : Caret map form => ( readerMacro "with-meta" [form, map] );
 
 atom
   : Num => ( Sexp.Num Num )
