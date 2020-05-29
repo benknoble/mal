@@ -48,20 +48,20 @@ end = struct
       mkDelimitedString delims inner s
     end
 
-  fun mkListLikeToString delims toString rep =
-    let val innerFun = (String.concatWith " ") o (map (toString rep))
+  fun mkMappableToString map delims toString =
+    let val innerFun = (String.concatWith " ") o (map toString)
     in mkDelimitedString delims innerFun
     end
 
-  fun mkListToString toString rep =
-    mkListLikeToString {left="(", right=")"} toString rep
-  fun mkVectorToString toString rep =
-    mkListLikeToString {left="[", right="]"} toString rep
+  fun mkListToString toString =
+    mkMappableToString List.map {left="(", right=")"} toString
+  fun mkVectorToString toString =
+    mkMappableToString List.map {left="[", right="]"} toString
 
   fun toString rep sexp =
     let
-      val listToString = mkListToString toString rep
-      val vectorToString = mkVectorToString toString rep
+      val listToString = mkListToString (toString rep)
+      val vectorToString = mkVectorToString (toString rep)
       val stringToString = mkStringToString rep
     in
       case sexp
