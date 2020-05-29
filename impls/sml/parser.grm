@@ -25,6 +25,8 @@
   | Nil ("nil")
 ;
 
+%keywords True, False, Nil;
+
 %start form;
 
 form
