@@ -4,6 +4,7 @@
 
 %defs (
   fun readerMacro name form = Sexp.List [(Sexp.sym name), form]
+  val isKeyword = String.isPrefix ":"
 );
 
 %tokens
@@ -63,10 +64,10 @@ atom
   | Nil => ( Sexp.Nil )
   | True => ( Sexp.Bool true ) | False => ( Sexp.Bool false )
   | astring
-  | sym_kw
+  | %try keyword
+  | %try symbol
   ;
 
 astring : DoubleQuote Char* DoubleQuote => ( Sexp.String (implode Char) ) ;
-sym_kw : ID => ( case (explode ID)
-                   of #":" :: tl => Sexp.kw (implode tl)
-                    | _ => Sexp.sym ID ) ;
+symbol : ID %where ( not (isKeyword ID) ) => ( Sexp.sym ID ) ;
+keyword : ID %where ( isKeyword ID ) => ( Sexp.kw (String.extract (ID, 1, NONE)) );
