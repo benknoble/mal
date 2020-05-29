@@ -7,6 +7,7 @@ structure Sexp : sig
                 | String of string
                 | List of form list
                 | Vector of form list
+                | Map of (form * form) list
   datatype representation = AsCode | AsText
 
   val sym : string -> form
@@ -22,6 +23,7 @@ end = struct
                 | String of string
                 | List of form list
                 | Vector of form list
+                | Map of (form * form) list
 
   datatype representation = AsCode | AsText
 
@@ -57,11 +59,24 @@ end = struct
     mkMappableToString List.map {left="(", right=")"} toString
   fun mkVectorToString toString =
     mkMappableToString List.map {left="[", right="]"} toString
+  fun mkMapToString toString =
+    let
+      fun kvToString (k,v) = String.concatWith " " (map toString [k, v])
+      (* because
+       * ListPair.mapEq : ('a * 'b -> 'c) -> 'a list * 'b list -> 'c list
+       * instead of
+       *                : ('a * 'b -> 'c) -> ('a * 'b) list -> 'c list
+       *)
+      fun mapPairs f = (ListPair.mapEq f) o ListPair.unzip
+    in
+      mkMappableToString mapPairs {left="{", right="}"} kvToString
+    end
 
   fun toString rep sexp =
     let
       val listToString = mkListToString (toString rep)
       val vectorToString = mkVectorToString (toString rep)
+      val mapToString = mkMapToString (toString rep)
       val stringToString = mkStringToString rep
     in
       case sexp
@@ -73,6 +88,7 @@ end = struct
          | String s => stringToString s
          | List sexps => listToString sexps
          | Vector sexps => vectorToString sexps
+         | Map kvs => mapToString kvs
     end
 
   val toReplString = toString AsCode
